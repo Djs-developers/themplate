@@ -1,0 +1,14 @@
+const Discord = require("discord.js");
+const { ContextMenuCommandBuilder } = require('@discordjs/builders');
+
+module.exports = {
+  data: new ContextMenuCommandBuilder()
+    .setName('')
+    .setType(),
+
+  run: async (client, interaction, db) => {
+
+    
+    
+  }
+};
