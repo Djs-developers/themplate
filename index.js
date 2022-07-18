@@ -1,9 +1,9 @@
 const Discord = require('discord.js');
 const { MongoClient } = require('mongodb');
-const { token, dburl } = require('./config.json');
+require('dotenv').config();
 
 global.client = new Discord.Client({ intents: ['GUILDS', 'GUILD_MESSAGES', 'GUILD_MEMBERS', 'GUILD_INVITES'] });
-global.mongoose = new MongoClient(dburl, { useUnifiedTopology: true })
+global.mongoose = new MongoClient(process.env['DBURL'], { useUnifiedTopology: true })
 
 mongoose.connect(function (err) {
 	if (err) {
@@ -15,4 +15,4 @@ mongoose.connect(function (err) {
 	}
 }, { autoIndex: false })
 
-client.login(token)
+client.login(process.env['TOKEN'])

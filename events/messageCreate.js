@@ -1,10 +1,11 @@
 const fs = require('fs');
 const { prefix } = require('../config.json');
 const { check } = require('../handler/perms.js');
+const { get } = require('../handler/alias.js');
 
 client.on("messageCreate", async (message) => {
-  var cmd = null;
-  var msg = null;
+  let cmd;
+  let msg;
 
   if (!message.content.startsWith(prefix)) return;
   if (message.author.bot) return;
@@ -12,9 +13,9 @@ client.on("messageCreate", async (message) => {
   const permission = check(message, 'message');
 
   if (!permission) return;
- 
-  var args = message.content.trim().split(/ +/g);
-  cmd = args[0].slice(prefix.length).toLowerCase();
+
+  let args = message.content.trim().split(/ +/g);
+  cmd = get(message);
   
   if (fs.existsSync(`./src/commands/${cmd}.js`)) {
     msg = require(`../src/commands/${cmd}.js`);
